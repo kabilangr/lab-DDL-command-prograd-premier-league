@@ -13,7 +13,7 @@ CREATE TABLE city
 (
 id NUMBER(11),
 name VARCHAR(100),
-CONSTRAINT city_pk PRIMARY KEY(id)
+CONSTRAINT city2_pk PRIMARY KEY(id)
 );
 
 
@@ -23,8 +23,8 @@ CREATE TABLE venue
 id NUMBER(11),
 name VARCHAR(100)NOT NULL,
 city_id NUMBER(11)NOT NULL,
-CONSTRAINT venue_pk PRIMARY KEY(id),
-CONSTRAINT venue_fk FOREIGN KEY(city_id) REFERENCES city(id)
+CONSTRAINT venue1_pk PRIMARY KEY(id),
+CONSTRAINT venue2_fk FOREIGN KEY(city_id) REFERENCES city(id)
 );
 
 
@@ -36,8 +36,8 @@ name VARCHAR(100)NOT NULL,
 coach VARCHAR(100)NOT NULL,
 home_city_id NUMBER(11)NOT NULL,
 captain NUMBER(11),
-CONSTRAINT team_pk PRIMARY KEY(id),
-CONSTRAINT team_fk FOREIGN KEY(home_city_id) REFERENCES city(id) 
+CONSTRAINT team3_pk PRIMARY KEY(id),
+CONSTRAINT team4_fk FOREIGN KEY(home_city_id) REFERENCES city(id) 
 );
 
 
@@ -49,9 +49,9 @@ name VARCHAR(100)NOT NULL,
 country VARCHAR(100)NOT NULL,
 skill_id NUMBER(11)NOT NULL,
 team_id NUMBER(11)NOT NULL,
-CONSTRAINT player_pk PRIMARY KEY(id),
-CONSTRAINT player_fk FOREIGN KEY(skill_id) REFERENCES skill(id) ,
-CONSTRAINT player_fk FOREIGN KEY(team_id) REFERENCES team(id)
+CONSTRAINT player5_pk PRIMARY KEY(id),
+CONSTRAINT player6_fk FOREIGN KEY(skill_id) REFERENCES skill(id) ,
+CONSTRAINT player7_fk FOREIGN KEY(team_id) REFERENCES team(id)
 );
 -- **Create outcome table**
 CREATE TABLE outcome
@@ -62,17 +62,17 @@ winner_team_id NUMBER(11),
 wickets NUMBER(20),
 runs NUMBER(11),
 player_of_match NUMBER(11),
-CONSTRAINT outcome_pk PRIMARY KEY(id),
-CONSTRAINT outcome_fk FOREIGN KEY(winner_team_id) REFERENCES team(id),
-CONSTRAINT outcome_fk FOREIGN KEY(player_of_match) REFERENCES player(id)
+CONSTRAINT outcome1_pk PRIMARY KEY(id),
+CONSTRAINT outcome2_fk FOREIGN KEY(winner_team_id) REFERENCES team(id),
+CONSTRAINT outcome3_fk FOREIGN KEY(player_of_match) REFERENCES player(id)
 );
 -- **Create innings table**
 CREATE TABLE innings
 (
 id NUMBER(11),
 batting_team_id NUMBER(11)NOT NULL,
-CONSTRAINT innings_pk PRIMARY KEY(id),
-CONSTRAINT innings_fk FOREIGN KEY(batting_team_id) REFERENCES team(id)
+CONSTRAINT innings1_pk PRIMARY KEY(id),
+CONSTRAINT innings2_fk FOREIGN KEY(batting_team_id) REFERENCES team(id)
 );
 -- **Create game table**
 CREATE TABLE game
@@ -85,39 +85,39 @@ venue_id NUMBER(11)NOT NULL,
 outcome_id NUMBER(11)NOT NULL,
 first_innings_id NUMBER(11),
 second_innings_id NUMBER(11),
-CONSTRAINT game_pk PRIMARY KEY(id),
-CONSTRAINT game_fk FOREIGN KEY(team_id_1) REFERENCES team(id),
-CONSTRAINT game_fk FOREIGN KEY(team_id_2) REFERENCES team(id),
-CONSTRAINT game_fk FOREIGN KEY(venue_id) REFERENCES venue(id),
-CONSTRAINT game_fk FOREIGN KEY(outcome_id) REFERENCES outcome(id),
-CONSTRAINT game_fk FOREIGN KEY(first_innings_id) REFERENCES innings(id),
-CONSTRAINT game_fk FOREIGN KEY(second_innings_id) REFERENCES innings(id)
+CONSTRAINT game1_pk PRIMARY KEY(id),
+CONSTRAINT game2_fk FOREIGN KEY(team_id_1) REFERENCES team(id),
+CONSTRAINT game3_fk FOREIGN KEY(team_id_2) REFERENCES team(id),
+CONSTRAINT game4_fk FOREIGN KEY(venue_id) REFERENCES venue(id),
+CONSTRAINT game5_fk FOREIGN KEY(outcome_id) REFERENCES outcome(id),
+CONSTRAINT game6_fk FOREIGN KEY(first_innings_id) REFERENCES innings(id),
+CONSTRAINT game7_fk FOREIGN KEY(second_innings_id) REFERENCES innings(id)
 );
 -- **Create umpire table**
 CREATE TABLE umpire
 (
 id NUMBER(11),
 name VARCHAR(100)NOT NULL,
-CONSTRAINT umpire_pk PRIMARY KEY(id)
+CONSTRAINT umpire1_pk PRIMARY KEY(id)
 );
 -- **Create umpire_type table**
-CREATE TABLE umpire_type
+CREATE TABLE umpire2_type
 (
 id NUMBER(11),
 type VARCHAR(100)NOT NULL,
-CONSTRAINT umpire_type_pk PRIMARY KEY(id)
+CONSTRAINT umpire1_type_pk PRIMARY KEY(id)
 );
 -- **Create game_umpire_type table**
-CREATE TABLE game_umpire_type
+CREATE TABLE game2_umpire_type
 (
 id NUMBER(11),
 game_id NUMBER(11)NOT NULL,
 umpire_id NUMBER(11)NOT NULL,
 umpire_type_id NUMBER(11)NOT NULL,
-CONSTRAINT game_umpire_type_pK PRIMARY KEY(id),
-CONSTRAINT game_umpire_type_fk FOREIGN KEY(game_id) REFERENCES game(id),
-CONSTRAINT game_umpire_type_fk FOREIGN KEY(umpire_id) REFERENCES umpire(id),
-CONSTRAINT game_umpire_type_fk FOREIGN KEY(umpire_type_id) REFERENCES umpire_type(id)
+CONSTRAINT game_umpire_type1_pK PRIMARY KEY(id),
+CONSTRAINT game_umpire_type2_fk FOREIGN KEY(game_id) REFERENCES game(id),
+CONSTRAINT game_umpire_type3_fk FOREIGN KEY(umpire_id) REFERENCES umpire(id),
+CONSTRAINT game_umpire_type4_fk FOREIGN KEY(umpire_type_id) REFERENCES umpire_type(id)
 );
 -- **Create wicket_type table**
 CREATE TABLE wicket_type
@@ -137,11 +137,11 @@ batsman_id NUMBER(11)NOT NULL,
 bowler_id NUMBER(11)NOT NULL,
 non_striker_id NUMBER(11)NOT NULL,
 runs NUMBER(11)NOT NULL,
-CONSTRAINT delivery_pk PRIMARY KEY(id),
-CONSTRAINT delivery_fk FOREIGN KEY(innings_id) REFERENCES innings(id),
-CONSTRAINT delivery_fk FOREIGN KEY(batsman_id) REFERENCES player(id),
-CONSTRAINT delivery_fk FOREIGN KEY(bowler_id) REFERENCES player(id),
-CONSTRAINT delivery_fk FOREIGN KEY(non_striker_id) REFERENCES player(id)
+CONSTRAINT delivery1_pk PRIMARY KEY(id),
+CONSTRAINT delivery2_fk FOREIGN KEY(innings_id) REFERENCES innings(id),
+CONSTRAINT delivery3_fk FOREIGN KEY(batsman_id) REFERENCES player(id),
+CONSTRAINT delivery4_fk FOREIGN KEY(bowler_id) REFERENCES player(id),
+CONSTRAINT delivery5_fk FOREIGN KEY(non_striker_id) REFERENCES player(id)
 );
 -- **Change wicket table**
 CREATE TABLE wicket
@@ -151,11 +151,11 @@ delivery_id NUMBER(11)NOT NULL,
 wicket_type_id NUMBER(11)NOT NULL,
 player_id NUMBER(11)NOT NULL,
 fielder_id NUMBER(11),
-CONSTRAINT wicket_pk PRIMARY KEY(id),
-CONSTRAINT wicket_fk FOREIGN KEY(delivery_id) REFERENCES delivery(id),
-CONSTRAINT wicket_fk FOREIGN KEY(wicket_type_id) REFERENCES wicket_type(id),
-CONSTRAINT wicket_fk FOREIGN KEY(player_id) REFERENCES player(id),
-CONSTRAINT wicket_fk FOREIGN KEY(fielder_id) REFERENCES player(id)
+CONSTRAINT wicket1_pk PRIMARY KEY(id),
+CONSTRAINT wicket2_fk FOREIGN KEY(delivery_id) REFERENCES delivery(id),
+CONSTRAINT wicket3_fk FOREIGN KEY(wicket_type_id) REFERENCES wicket_type(id),
+CONSTRAINT wicket4_fk FOREIGN KEY(player_id) REFERENCES player(id),
+CONSTRAINT wicket5_fk FOREIGN KEY(fielder_id) REFERENCES player(id)
 );
 -- **Create extratype table**
 CREATE TABLE extratype
@@ -171,9 +171,9 @@ id NUMBER(11),
 delivery_id NUMBER(11)NOT NULL,
 extra_type_id NUMBER(11)NOT NULL,
 runs NUMBER(11)NOT NULL,
-CONSTRAINT extradelivery_pk PRIMARY KEY(id),
-CONSTRAINT extradelivery_fk FOREIGN KEY(delivery_id) REFERENCES delivery(id),
-CONSTRAINT extradelivery_fk FOREIGN KEY(extra_type_id) REFERENCES extratype(id)
+CONSTRAINT extradelivery1_pk PRIMARY KEY(id),
+CONSTRAINT extradelivery2_fk FOREIGN KEY(delivery_id) REFERENCES delivery(id),
+CONSTRAINT extradelivery3_fk FOREIGN KEY(extra_type_id) REFERENCES extratype(id)
 );
 -- **Alter column name id**
 ALTER TABLE skill
